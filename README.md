@@ -26,3 +26,4 @@ docker-compose up -d
 docker-compose exec --user=application web composer install
 ```
 "# BudgetPro" 
+[![Build Status](https://travis-ci.org/Chenruii/BudgetPro.svg?branch=master)](https://travis-ci.org/Chenruii/BudgetPro)
