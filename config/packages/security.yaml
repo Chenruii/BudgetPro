@@ -6,11 +6,17 @@ security:
                       class: App\Entity\User
                       property: apiKey
     firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-        main:
-            anonymous: true
+            dev:
+                pattern: ^/(_(profiler|wdt)|css|images|js)/
+                security: false
+            main:
+                anonymous: ~
+                logout:  ~
+                stateless: true
+                provider: our_db_provider
+                guard:
+                    authenticators:
+                        - App\Security\ApiTokenAuthenticator
 
             # activate different ways to authenticate
 
