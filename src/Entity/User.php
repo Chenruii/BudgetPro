@@ -5,9 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -15,7 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface
 {
     /**
-     * @UniqueEntity("email")
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -57,25 +56,24 @@ class User implements UserInterface
      */
     private $country;
 
-    /**
-     *
-     */
-    private $cards;
 
-    /**
-     *
-     */
-    private $users;
-
-    /**
-     *
-     */
-    private $subscription;
 
     /**
      * @ORM\Column(type="simple_array", nullable=true)
      */
     private $roles = [];
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="cards")
+     */
+    private $cards;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="subscription")
+     */
+    private $subscription;
+
+
 
     public function __construct()
     {
@@ -275,6 +273,49 @@ class User implements UserInterface
     public function setRoles($roles)
     {
         $this->roles = $roles;
+    }
+
+    public function getUser(): ?Subscription
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Subscription $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Subscription[]
+     */
+    public function getSubscription(): Collection
+    {
+        return $this->subscription;
+    }
+
+    public function addSubscription(Subscription $subscription): self
+    {
+        if (!$this->subscription->contains($subscription)) {
+            $this->subscription[] = $subscription;
+            $subscription->setSubscription($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubscription(Subscription $subscription): self
+    {
+        if ($this->subscription->contains($subscription)) {
+            $this->subscription->removeElement($subscription);
+            // set the owning side to null (unless already changed)
+            if ($subscription->getSubscription() === $this) {
+                $subscription->setSubscription(null);
+            }
+        }
+
+        return $this;
     }
 
 //    /**

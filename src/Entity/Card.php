@@ -42,9 +42,10 @@ class Card
     private $value;
 
     /**
-     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Card", mappedBy="user")
      */
-    private $cards;
+    private $user;
+
 
     public function getId(): ?int
     {
@@ -119,6 +120,18 @@ class Card
     public function setCards(?User $cards): self
     {
         $this->cards = $cards;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -34,9 +34,11 @@ class Subscription
     private $url;
 
     /**
-     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Subscription", mappedBy="subscription")
      */
-    private $users;
+    private $subscription;
+
+
 
 
 
@@ -113,6 +115,18 @@ class Subscription
                 $user->setUsers(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSubscription(): ?User
+    {
+        return $this->subscription;
+    }
+
+    public function setSubscription(?User $subscription): self
+    {
+        $this->subscription = $subscription;
 
         return $this;
     }
