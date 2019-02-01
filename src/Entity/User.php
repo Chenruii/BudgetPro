@@ -58,6 +58,11 @@ class User
      */
     private $cards;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Subscription", inversedBy="users")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->cards = new ArrayCollection();
@@ -179,6 +184,18 @@ class User
                 $card->setCards(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUsers(): ?Subscription
+    {
+        return $this->users;
+    }
+
+    public function setUsers(?Subscription $users): self
+    {
+        $this->users = $users;
 
         return $this;
     }
