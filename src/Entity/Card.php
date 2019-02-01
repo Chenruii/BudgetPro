@@ -41,6 +41,11 @@ class Card
      */
     private $value;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="cards")
+     */
+    private $cards;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,6 +107,18 @@ class Card
     public function setValue(int $value): self
     {
         $this->value = $value;
+
+        return $this;
+    }
+
+    public function getCards(): ?User
+    {
+        return $this->cards;
+    }
+
+    public function setCards(?User $cards): self
+    {
+        $this->cards = $cards;
 
         return $this;
     }
