@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class UserController extends  AbstractFOSRestController
 {
@@ -41,6 +42,7 @@ class UserController extends  AbstractFOSRestController
 
     /**
      * @Rest\Post("api/users/{email}")
+     * @ParamConverter("user",converter="fos_rest.request_body")
      */
     public function postApiUser (User $user, ConstraintViolationListInterface $validationErrors)
     {
