@@ -21,12 +21,19 @@ class UserController extends  AbstractFOSRestController
     /**
      * @Rest\Get("api/users/{email}")
      */
-    public function getOneUser(User $user){}
+    public function getOneUser(User $user)
+    {
+        return $this->json($user);
+    }
 
     /**
      * @Rest\Get("api/users")
      */
-    public function getAllUsers(){}
+    public function getAllUsers()
+    {
+        $users = $this->userRepository->findAll();
+        return $this->view($users);
+    }
 
     /**
      * @Rest\Post("api/users/{email}")
