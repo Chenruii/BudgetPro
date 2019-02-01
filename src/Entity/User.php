@@ -54,17 +54,17 @@ class User
     private $country;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Card", mappedBy="cards")
+     *
      */
     private $cards;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Subscription", inversedBy="users")
+     *
      */
     private $users;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Subscription", mappedBy="subscription")
+     *
      */
     private $subscription;
 

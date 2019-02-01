@@ -42,7 +42,7 @@ class Card
     private $value;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="cards")
+     *
      */
     private $cards;
 

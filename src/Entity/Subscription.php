@@ -34,14 +34,11 @@ class Subscription
     private $url;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="users")
+     *
      */
     private $users;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="subscription")
-     */
-    private $subscription;
+
 
     public function __construct()
     {
@@ -120,15 +117,5 @@ class Subscription
         return $this;
     }
 
-    public function getSubscription(): ?User
-    {
-        return $this->subscription;
-    }
 
-    public function setSubscription(?User $subscription): self
-    {
-        $this->subscription = $subscription;
-
-        return $this;
-    }
 }
