@@ -33,6 +33,7 @@ class UserController extends  AbstractFOSRestController
 
     /**
      * @Rest\Get("api/users")
+     * @Rest\View(serializerGroups={"user"})
      */
     public function getAllUsers()
     {
