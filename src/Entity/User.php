@@ -5,13 +5,16 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Nelmio\Alice\scenario3\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
+     * @UniqueEntity("email")
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -206,34 +209,34 @@ class User
         return $this;
     }
 
-    /**
-     * @return Collection|Subscription[]
-     */
-    public function getSubscription(): Collection
-    {
-        return $this->subscription;
-    }
-
-    public function addSubscription(Subscription $subscription): self
-    {
-        if (!$this->subscription->contains($subscription)) {
-            $this->subscription[] = $subscription;
-            $subscription->setSubscription($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSubscription(Subscription $subscription): self
-    {
-        if ($this->subscription->contains($subscription)) {
-            $this->subscription->removeElement($subscription);
-            // set the owning side to null (unless already changed)
-            if ($subscription->getSubscription() === $this) {
-                $subscription->setSubscription(null);
-            }
-        }
-
-        return $this;
-    }
+//    /**
+//     * @return Collection|Subscription[]
+//     */
+//    public function getSubscription(): Collection
+//    {
+//        return $this->subscription;
+//    }
+//
+//    public function addSubscription(Subscription $subscription): self
+//    {
+//        if (!$this->subscription->contains($subscription)) {
+//            $this->subscription[] = $subscription;
+//            $subscription->setSubscription($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeSubscription(Subscription $subscription): self
+//    {
+//        if ($this->subscription->contains($subscription)) {
+//            $this->subscription->removeElement($subscription);
+//            // set the owning side to null (unless already changed)
+//            if ($subscription->getSubscription() === $this) {
+//                $subscription->setSubscription(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
 }
