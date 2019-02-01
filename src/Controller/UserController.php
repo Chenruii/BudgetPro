@@ -3,11 +3,21 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 
 class UserController extends  AbstractFOSRestController
 {
+    private $userRepository;
+    private $em;
+
+    public function __construct(UserRepository $userRepository,EntityManagerInterface $entityManager)
+    {
+        $this->userRepository = $userRepository;
+        $this->em = $entityManager;
+    }
     /**
      * @Rest\Get("api/users/{email}")
      */
