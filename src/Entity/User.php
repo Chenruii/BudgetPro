@@ -63,9 +63,15 @@ class User
      */
     private $users;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Subscription", mappedBy="subscription")
+     */
+    private $subscription;
+
     public function __construct()
     {
         $this->cards = new ArrayCollection();
+        $this->subscription = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -196,6 +202,37 @@ class User
     public function setUsers(?Subscription $users): self
     {
         $this->users = $users;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Subscription[]
+     */
+    public function getSubscription(): Collection
+    {
+        return $this->subscription;
+    }
+
+    public function addSubscription(Subscription $subscription): self
+    {
+        if (!$this->subscription->contains($subscription)) {
+            $this->subscription[] = $subscription;
+            $subscription->setSubscription($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubscription(Subscription $subscription): self
+    {
+        if ($this->subscription->contains($subscription)) {
+            $this->subscription->removeElement($subscription);
+            // set the owning side to null (unless already changed)
+            if ($subscription->getSubscription() === $this) {
+                $subscription->setSubscription(null);
+            }
+        }
 
         return $this;
     }
