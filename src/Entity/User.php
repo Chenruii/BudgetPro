@@ -318,6 +318,14 @@ class User implements UserInterface
         return $this;
     }
 
+    public function setCard($card)
+    {
+    }
+
+    public function setSubscription($subscription)
+    {
+    }
+
 //    /**
 //     * @return Collection|Subscription[]
 //     */
