@@ -35,19 +35,19 @@ class User implements UserInterface
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=false)
      * @ORM\Column(unique=true)
      * @Assert\NotBlank
      */
     private $apiKey;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=false)
      */
     private $createdAt;
 
@@ -327,6 +327,10 @@ class User implements UserInterface
     }
 
     public function setSubscription($subscription)
+    {
+    }
+
+    public function setPassword($passwordEncoded)
     {
     }
 

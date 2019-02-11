@@ -7,6 +7,5 @@ App\Entity\User:
     createdAt: <dateTimeBetween('-10 years', '-10 years')>
     address: <address()>
     country: <country()>
-    cards:  '@card_*'
     subscription: '@subscription_*'
 

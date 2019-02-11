@@ -37,7 +37,7 @@ class Card
     private $currencyCode;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer" min="0", max="100000")
      */
     private $value;
 

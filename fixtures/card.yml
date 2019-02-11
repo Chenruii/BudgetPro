@@ -1,8 +1,0 @@
-App\Entity\Card:
-  card_{1..10}:
-    name: <text(25)>
-    creditCardType: <creditCardType()>
-    creditCardNumber: <creditCardNumber()>
-    currencyCode: <currencyCode()>
-    value: <numberBetween(0, 100000)>
-
