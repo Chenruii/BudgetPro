@@ -11,6 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * 
  * @UniqueEntity("email")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
@@ -40,8 +41,10 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Groups("user")
+     * @Assert\NotBlank()
      * @ORM\Column(unique=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank
      */
     private $apiKey;
@@ -68,7 +71,7 @@ class User implements UserInterface
     private $roles = [];
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="cards")
+     * @ORM\OneToMany(targetEntity="App\Entity\Card", mappedBy="user")
      */
     private $cards;
 
@@ -76,7 +79,6 @@ class User implements UserInterface
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="subscription")
      */
     private $subscription;
-
 
 
     public function __construct()
@@ -205,17 +207,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getUsers(): ?Subscription
-    {
-        return $this->users;
-    }
-
-    public function setUsers(?Subscription $users): self
-    {
-        $this->users = $users;
-
-        return $this;
-    }
 
     /**
      * Returns the password used to authenticate the user.
@@ -279,48 +270,37 @@ class User implements UserInterface
         $this->roles = $roles;
     }
 
-    public function getUser(): ?Subscription
-    {
-        return $this->user;
-    }
 
-    public function setUser(?Subscription $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Subscription[]
-     */
-    public function getSubscription(): Collection
-    {
-        return $this->subscription;
-    }
-
-    public function addSubscription(Subscription $subscription): self
-    {
-        if (!$this->subscription->contains($subscription)) {
-            $this->subscription[] = $subscription;
-            $subscription->setSubscription($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSubscription(Subscription $subscription): self
-    {
-        if ($this->subscription->contains($subscription)) {
-            $this->subscription->removeElement($subscription);
-            // set the owning side to null (unless already changed)
-            if ($subscription->getSubscription() === $this) {
-                $subscription->setSubscription(null);
-            }
-        }
-
-        return $this;
-    }
+//    /**
+//     * @return Collection|Subscription[]
+//     */
+//    public function getSubscription(): Collection
+//    {
+//        return $this->subscription;
+//    }
+//
+//    public function addSubscription(Subscription $subscription): self
+//    {
+//        if (!$this->subscription->contains($subscription)) {
+//            $this->subscription[] = $subscription;
+//            $subscription->setSubscription($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeSubscription(Subscription $subscription): self
+//    {
+//        if ($this->subscription->contains($subscription)) {
+//            $this->subscription->removeElement($subscription);
+//            // set the owning side to null (unless already changed)
+//            if ($subscription->getSubscription() === $this) {
+//                $subscription->setSubscription(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
 
     public function setCard($card)
     {

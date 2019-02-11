@@ -37,12 +37,12 @@ class Card
     private $currencyCode;
 
     /**
-     * @ORM\Column(type="integer" min="0", max="100000")
+     * @ORM\Column(type="integer")
      */
     private $value;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Card", mappedBy="user")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="cards")
      */
     private $user;
 
